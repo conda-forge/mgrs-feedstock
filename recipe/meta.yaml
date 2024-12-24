@@ -1,28 +1,29 @@
 {% set name = "mgrs" %}
-{% set version = "1.4.6" %}
+{% set version = "1.5.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: c9489623eab97a9d38eb2fe563a3e9e813694760ea240d055c49b18ed30a7676
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: bff4f7e806ed29d46f8a31a01e6e0e6629e1eca425f745d39af639260bbc89c6
 
 build:
   number: 0
   skip: true  # [(win and vc<14) or (python_impl == 'pypy')]
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
-    - pip
     - python
+    - pip
     - setuptools
     - wheel
   run:
@@ -34,6 +35,11 @@ requirements:
 test:
   imports:
     - mgrs
+  requires:
+    - pip
+    - python
+  commands:
+    - pip check
 
 about:
   home: https://github.com/hobu/mgrs
@@ -45,6 +51,7 @@ about:
 
 extra:
   recipe-maintainers:
+    - mukhery
     - mxr-conda
     - benhuff
     - oblute
