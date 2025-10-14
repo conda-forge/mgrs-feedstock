@@ -1,0 +1,65 @@
+schema_version: 1
+
+context:
+  name: mgrs
+  version: 1.5.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: bff4f7e806ed29d46f8a31a01e6e0e6629e1eca425f745d39af639260bbc89c6
+
+build:
+  number: 3
+  skip: "(win and vc<14) or (python_impl == 'pypy')"
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: python
+    - if: build_platform != target_platform
+      then: cross-python_${{ target_platform }}
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - ${{ compiler('cxx') }}
+  host:
+    - python
+    - pip
+    - setuptools
+    - wheel
+  run:
+    - python
+    - setuptools
+    - wheel
+    - packaging
+
+tests:
+  - python:
+      imports:
+        - mgrs
+  - requirements:
+      run:
+        - pip
+        - python
+    script:
+      - pip check
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: MGRS coordinate conversion for Python
+  homepage: https://github.com/hobu/mgrs
+  repository: https://github.com/hobu/mgrs
+
+extra:
+  recipe-maintainers:
+    - mukhery
+    - mxr-conda
+    - benhuff
+    - oblute
+    - rluria14
+    - hobu
