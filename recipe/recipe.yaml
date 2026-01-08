@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: mgrs
-  version: 1.5.0
+  version: "1.5.1"
 
 package:
   name: ${{ name|lower }}
@@ -10,19 +10,19 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: bff4f7e806ed29d46f8a31a01e6e0e6629e1eca425f745d39af639260bbc89c6
+  sha256: dd346317781ce3a3b354c15a1c1733def3f7c8be76c7665dc289e52b8b0529e9
 
 build:
-  number: 3
+  number: 0
   skip: "(win and vc<14) or (python_impl == 'pypy')"
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
     - if: build_platform != target_platform
-      then: python
-    - if: build_platform != target_platform
-      then: cross-python_${{ target_platform }}
+      then:
+        - python
+        - cross-python_${{ target_platform }}
     - ${{ compiler('c') }}
     - ${{ stdlib("c") }}
     - ${{ compiler('cxx') }}
