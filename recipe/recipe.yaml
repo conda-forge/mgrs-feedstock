@@ -13,7 +13,7 @@ source:
   sha256: 41ba8f5bfbf8d15fb5d34d275cd8201fc9917ebb10fb82913831e95a31930ffa
 
 build:
-  number: 0
+  number: 1
   skip: "(win and vc<14) or (python_impl == 'pypy')"
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
@@ -31,7 +31,6 @@ requirements:
     - pip
     - setuptools
     - wheel
-    - hatch
   run:
     - python
     - setuptools
