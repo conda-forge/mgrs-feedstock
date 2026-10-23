@@ -23,17 +23,20 @@ requirements:
       then:
         - python
         - cross-python_${{ target_platform }}
+        - pybind11
+        - scikit-build-core
+    - make
     - ${{ compiler('c') }}
     - ${{ stdlib("c") }}
     - ${{ compiler('cxx') }}
+    - cmake
+    - ninja
+    - scikit-build-core
   host:
     - python
     - pip
     - uv
-    - wheel
     - scikit-build-core
-    - cmake
-    - ninja
     - pybind11
   run:
     - python
