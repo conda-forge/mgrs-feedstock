@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: mgrs
-  version: "1.5.4"
+  version: "1.6.0"
 
 package:
   name: ${{ name|lower }}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: 41ba8f5bfbf8d15fb5d34d275cd8201fc9917ebb10fb82913831e95a31930ffa
+  sha256: 5a6b4f6d446231d236c0eacdbf265e088ea15bb2483fb496f696992bc7a28b63
 
 build:
-  number: 2
+  number: 0
   skip: "(win and vc<14) or (python_impl == 'pypy')"
   script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
