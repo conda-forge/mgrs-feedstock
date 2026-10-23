@@ -29,13 +29,14 @@ requirements:
   host:
     - python
     - pip
-    - setuptools
+    - uv
     - wheel
+    - scikit-build-core
+    - cmake
+    - ninja
+    - pybind11
   run:
     - python
-    - setuptools
-    - wheel
-    - packaging
 
 tests:
   - python:
