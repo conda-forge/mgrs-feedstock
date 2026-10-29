@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: mgrs
-  version: "1.6.0"
+  version: "1.7.0"
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: 5a6b4f6d446231d236c0eacdbf265e088ea15bb2483fb496f696992bc7a28b63
+  sha256: f9b5d1d36e78191e7385fdcbe90f025d63aa0f417452fd4af1351d977cb7d9ee
 
 build:
   number: 0
