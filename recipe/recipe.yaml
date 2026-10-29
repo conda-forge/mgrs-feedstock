@@ -32,6 +32,7 @@ requirements:
     - cmake
     - ninja
     - scikit-build-core
+    - rust
   host:
     - python
     - pip
